@@ -1,20 +1,21 @@
 sudo: required
+language: generic
 services:
   - docker
 
 before_install:
-  - docker build -t vyoung/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t volunteerism1776/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true vyoung/react-test npm test
+  - docker run -e CI=true volunteerism1776/react-test npm test
 
 after_success:
-  - docker build -t vyoung/multi-client ./client
-  - docker build -t vyoung/multi-nginx ./nginx
-  - docker build -t vyoung/multi-server ./server
-  - docker build -t vyoung/multi-worker ./worker
+  - docker build -t volunteerism1776/multi-client ./client
+  - docker build -t volunteerism1776/multi-nginx ./nginx
+  - docker build -t volunteerism1776/multi-server ./server
+  - docker build -t volunteerism1776/multi-worker ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
-  - docker push vyoung/multi-client
-  - docker push vyoung/multi-nginx
-  - docker push vyoung/multi-server
-  - docker push vyoung/multi-worker
+  - docker push volunteerism1776/multi-client
+  - docker push volunteerism1776/multi-nginx
+  - docker push volunteerism1776/multi-server
+  - docker push volunteerism1776/multi-worker
