@@ -13,3 +13,8 @@ after_success:
   - docker build -t vyoung/multi-nginx ./nginx
   - docker build -t vyoung/multi-server ./server
   - docker build -t vyoung/multi-worker ./worker
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker push vyoung/multi-client
+  - docker push vyoung/multi-nginx
+  - docker push vyoung/multi-server
+  - docker push vyoung/multi-worker
